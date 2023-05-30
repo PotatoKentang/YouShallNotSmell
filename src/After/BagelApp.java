@@ -71,7 +71,7 @@ public class BagelApp extends JFrame{
 	private JRadioButton white;
 	private JRadioButton wheat;
 	private JRadioButton salt;
-	private JRadioButton seseme;
+	private JRadioButton sesame;
 	private JRadioButton popy;
 	private ButtonGroup bagelTypeRadioGroup;
 	
@@ -168,300 +168,591 @@ public class BagelApp extends JFrame{
 
 	
 	//before
-	private void buildPanel()
-	{
-		/* A very big build method because
-		 * all the panels are pre-made
-		 */
-		
-		// PARENT PANEL
-		
-		parent = new JPanel();
-		parent.setLayout(new BorderLayout(10,10));
-		
-		title = new JLabel("Order Entry Screen");
-		title.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		productCategoryPanel = new JPanel();
-		productCoffeeDetailPanel = new JPanel();
-		productBagelDetailPanel = new JPanel();
-		productPastryDetailPanel = new JPanel();
-		toolbarParentPanel = new JPanel();
-		
-		// PANEL1
-		
-		productCategoryPanel.setBorder(BorderFactory.createTitledBorder("Products"));
-		productCategoryPanel.setLayout(new GridLayout(3,1));
-		
-		product1 = new JRadioButton("Coffee");
-		product2 = new JRadioButton("Bagel");
-		product3 = new JRadioButton("Pastry");
-		productgroup = new ButtonGroup();
-		
-		productgroup.add(product1);
-		productgroup.add(product2);
-		productgroup.add(product3);
-		
-		product1.addActionListener(new ButtonListener());
-		product2.addActionListener(new ButtonListener());
-		product3.addActionListener(new ButtonListener());
-		
-		productCategoryPanel.add(product1);
-		productCategoryPanel.add(product2);
-		productCategoryPanel.add(product3);
-		
-		productCoffeeDetailPanel.setLayout(new GridLayout(3,1));
-		productCoffeeDetailPanel.setPreferredSize(new Dimension(180, 650));
-		productBagelDetailPanel.setLayout(new GridLayout(3,1));
-		productBagelDetailPanel.setPreferredSize(new Dimension(180, 650));
-		productPastryDetailPanel.setLayout(new GridLayout(2,1));
-		productPastryDetailPanel.setPreferredSize(new Dimension(180, 650));
-		
-		coffeeSizePanel = new JPanel();
-		coffeeTypePanel = new JPanel();
-		coffeeExtrasPanel = new JPanel();
-		
-		// PANEL3
-		
-		toolbarParentPanel.setLayout(new BorderLayout());
-		
-		toolbarGroup = new JPanel();
-		orderDisplay = new JPanel();
-		orderDisplay.setLayout(new BorderLayout());
-		
-		quantitylabel = new JLabel("Quantity: ");
-		quantity = new JTextField(5);
-		membery = new JRadioButton("Member");
-		membern = new JRadioButton("Not Member");
-		membergroup = new ButtonGroup();
-		delete = new JButton("Delete Previous");
-		
-		membery.setActionCommand("Member");
-		membern.setActionCommand("Not Member");
-		
-		delete.addActionListener(new ButtonListener());
-		quantity.addActionListener(new ButtonListener());
-		membern.addActionListener(new ButtonListener());
-		membery.addActionListener(new ButtonListener());
-		
-		membergroup.add(membery);
-		membergroup.add(membern);
-		
-		text = new JTextArea();
-		scroll = new JScrollPane(text);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        text.setLineWrap(true);
-        text.setWrapStyleWord(true);
-        text.setEditable(false);
-        
-        toolbarGroup.add(quantitylabel);
-        toolbarGroup.add(quantity);
-        toolbarGroup.add(membery);
-        toolbarGroup.add(membern);
-        toolbarGroup.add(delete);
-        orderDisplay.add(scroll, BorderLayout.CENTER);
-        
-        toolbarParentPanel.add(toolbarGroup, BorderLayout.SOUTH);
-		toolbarParentPanel.add(orderDisplay, BorderLayout.CENTER);
-		
-		// BUTTON PANEL
-		
-		buttons = new JPanel();
-		buttonEnterItem = new JButton("Enter Item");
-		buttonTotalItem = new JButton("Total");
-		buttonNewOrderItem = new JButton("New Order");
-		buttons.setBackground(Color.black);
-		
-		buttonEnterItem.addActionListener(new ButtonListener());
-		buttonTotalItem.addActionListener(new ButtonListener());
-		buttonNewOrderItem.addActionListener(new ButtonListener());
-		
-		buttons.add(buttonEnterItem);
-		buttons.add(buttonTotalItem);
-		buttons.add(buttonNewOrderItem);
-		
-		//productCoffeeDetailPanel
-		
-		coffeeSizePanel.setLayout(new GridLayout(3,1));
-		coffeeTypePanel.setLayout(new GridLayout(3,1));
-		coffeeExtrasPanel.setLayout(new GridLayout(2,1));
-		
-		coffeeSizePanel.setBorder(BorderFactory.createTitledBorder("Size"));
-		
-		small = new JRadioButton("Small");
-		medium = new JRadioButton("Medium");
-		large = new JRadioButton("Large");
-		coffeeSizeRadioGroup = new ButtonGroup();
-		
-		small.setActionCommand("Small");
-		medium.setActionCommand("Medium");
-		large.setActionCommand("Large");
-		
-		small.addActionListener(new ButtonListener());
-		medium.addActionListener(new ButtonListener());
-		large.addActionListener(new ButtonListener());
-		
-		coffeeSizeRadioGroup.add(small);
-		coffeeSizeRadioGroup.add(medium);
-		coffeeSizeRadioGroup.add(large);
-		
-		coffeeSizePanel.add(small);
-		coffeeSizePanel.add(medium);
-		coffeeSizePanel.add(large);
-		
-		coffeeTypePanel.setBorder(BorderFactory.createTitledBorder("Type"));
-		
-		regular = new JRadioButton("Regular");
-		decafe = new JRadioButton("DeCafe");
-		roast = new JRadioButton("French Roast");
-		coffeeTypeRadioGroup = new ButtonGroup();
-		
-		regular.setActionCommand("Regular");
-		decafe.setActionCommand("DeCafe");
-		roast.setActionCommand("French Roast");
-		
-		regular.addActionListener(new ButtonListener());
-		decafe.addActionListener(new ButtonListener());
-		roast.addActionListener(new ButtonListener());
-		
-		coffeeTypeRadioGroup.add(regular);
-		coffeeTypeRadioGroup.add(decafe);
-		coffeeTypeRadioGroup.add(roast);
-		
-		coffeeTypePanel.add(regular);
-		coffeeTypePanel.add(decafe);
-		coffeeTypePanel.add(roast);
-		
-		coffeeExtrasPanel.setBorder(BorderFactory.createTitledBorder("Extras"));
-		
-		cream = new JCheckBox("Cream");
-		sugar = new JCheckBox("Sugar");
-		
-		cream.addActionListener(new ButtonListener());
-		sugar.addActionListener(new ButtonListener());
-		
-		coffeeExtrasPanel.add(cream);
-		coffeeExtrasPanel.add(sugar);
-		
-		productCoffeeDetailPanel.add(coffeeSizePanel);
-		productCoffeeDetailPanel.add(coffeeTypePanel);
-		productCoffeeDetailPanel.add(coffeeExtrasPanel);
-		
-		//productBagelDetailPanel
-		
-		bagelTypePanel = new JPanel();
-		bagelSpreadsPanel = new JPanel();
-		bagelToppingsPanel = new JPanel();
-		
-		bagelTypePanel.setLayout(new GridLayout(5,1));
-		bagelSpreadsPanel.setLayout(new GridLayout(5,1));
-		bagelToppingsPanel.setLayout(new GridLayout(2,1));
-		
-		bagelTypePanel.setBorder(BorderFactory.createTitledBorder("Bagel"));
-		
-		white = new JRadioButton("White");
-		wheat = new JRadioButton("Wheat");
-		salt = new JRadioButton("Salt");
-		seseme = new JRadioButton("Seseme");
-		popy = new JRadioButton("Popy");
-		bagelTypeRadioGroup = new ButtonGroup();
-		
-		white.setActionCommand("White");
-		wheat.setActionCommand("Wheat");
-		salt.setActionCommand("Salt");
-		seseme.setActionCommand("Seseme");
-		popy.setActionCommand("Popy");
-		
-		white.addActionListener(new ButtonListener());
-		wheat.addActionListener(new ButtonListener());
-		salt.addActionListener(new ButtonListener());
-		seseme.addActionListener(new ButtonListener());
-		popy.addActionListener(new ButtonListener());
-		
-		bagelTypeRadioGroup.add(white);
-		bagelTypeRadioGroup.add(wheat);
-		bagelTypeRadioGroup.add(salt);
-		bagelTypeRadioGroup.add(seseme);
-		bagelTypeRadioGroup.add(popy);
-		
-		bagelTypePanel.add(white);
-		bagelTypePanel.add(wheat);
-		bagelTypePanel.add(salt);
-		bagelTypePanel.add(seseme);
-		bagelTypePanel.add(popy);
-		
-		bagelSpreadsPanel.setBorder(BorderFactory.createTitledBorder("Spreads"));
-		
-		cc = new JRadioButton("Cream Cheese");
-		lcc = new JRadioButton("Lowfat Cream Cheese");
-		gc = new JRadioButton("Garlic Cream");
-		butter = new JRadioButton("Butter");
-		jam = new JRadioButton("Jam");
-		bagelSpreadsRadioGroup = new ButtonGroup();
-		
-		cc.setActionCommand("Cream Cheese");
-		lcc.setActionCommand("Lowfat Cream Cheese");
-		gc.setActionCommand("Garlic Cream");
-		butter.setActionCommand("Butter");
-		jam.setActionCommand("Jam ");
-		
-		cc.addActionListener(new ButtonListener());
-		lcc.addActionListener(new ButtonListener());
-		gc.addActionListener(new ButtonListener());
-		butter.addActionListener(new ButtonListener());
-		jam.addActionListener(new ButtonListener());
-		
-		bagelSpreadsRadioGroup.add(cc);
-		bagelSpreadsRadioGroup.add(lcc);
-		bagelSpreadsRadioGroup.add(gc);
-		bagelSpreadsRadioGroup.add(butter);
-		bagelSpreadsRadioGroup.add(jam);
-		
-		bagelSpreadsPanel.add(cc);
-		bagelSpreadsPanel.add(lcc);
-		bagelSpreadsPanel.add(gc);
-		bagelSpreadsPanel.add(butter);
-		bagelSpreadsPanel.add(jam);
-		
-		bagelToppingsPanel.setBorder(BorderFactory.createTitledBorder("Toppings"));
-		
-		lox = new JCheckBox("Lox");
-		novalox = new JCheckBox("Nova Lox");
-		
-		lox.addActionListener(new ButtonListener());
-		novalox.addActionListener(new ButtonListener());
-		
-		bagelToppingsPanel.add(lox);
-		bagelToppingsPanel.add(novalox);
-		
-		productBagelDetailPanel.add(bagelTypePanel);
-		productBagelDetailPanel.add(bagelSpreadsPanel);
-		productBagelDetailPanel.add(bagelToppingsPanel);
-		
-		//productPastryDetailPanel
-		
-		pastryPastriesPanel = new JPanel();
-		
-		pastryPastriesPanel.setLayout(new GridLayout());
-		pastryPastriesPanel.setBorder(BorderFactory.createTitledBorder("Pastries"));
-		
-		list = new JList(pastrylist);
-		
-		list.addListSelectionListener(new ListListener());
-		
-		pastryPastriesPanel.add(list);
-		productPastryDetailPanel.add(pastryPastriesPanel);
-		
-		parent.add(productCategoryPanel, BorderLayout.WEST);
-		parent.add(productCoffeeDetailPanel, BorderLayout.CENTER);
-		layout = (BorderLayout)parent.getLayout();
-		
-		product1.doClick();
-		membern.doClick();
+//	private void buildPanel()
+//	{
+//		/* A very big build method because
+//		 * all the panels are pre-made
+//		 */
+//		
+//		// PARENT PANEL
+//		
+//		parent = new JPanel();
+//		parent.setLayout(new BorderLayout(10,10));
+//		
+//		title = new JLabel("Order Entry Screen");
+//		title.setHorizontalAlignment(SwingConstants.CENTER);
+//		
+//		productCategoryPanel = new JPanel();
+//		productCategoryPanel.setBorder(BorderFactory.createTitledBorder("Products"));
+//		productCategoryPanel.setLayout(new GridLayout(3,1));
+//		
+//		
+//		productCoffeeDetailPanel = new JPanel();
+//		productBagelDetailPanel = new JPanel();
+//		productPastryDetailPanel = new JPanel();
+//		toolbarParentPanel = new JPanel();
+//		
+//		// PANEL1
+//		
+//		
+//		product1 = new JRadioButton("Coffee");
+//		product2 = new JRadioButton("Bagel");
+//		product3 = new JRadioButton("Pastry");
+//		productgroup = new ButtonGroup();
+//		
+//		productgroup.add(product1);
+//		productgroup.add(product2);
+//		productgroup.add(product3);
+//		
+//		product1.addActionListener(new ButtonListener());
+//		product2.addActionListener(new ButtonListener());
+//		product3.addActionListener(new ButtonListener());
+//		
+//		productCategoryPanel.add(product1);
+//		productCategoryPanel.add(product2);
+//		productCategoryPanel.add(product3);
+//		
+//		productCoffeeDetailPanel.setLayout(new GridLayout(3,1));
+//		productCoffeeDetailPanel.setPreferredSize(new Dimension(180, 650));
+//		productBagelDetailPanel.setLayout(new GridLayout(3,1));
+//		productBagelDetailPanel.setPreferredSize(new Dimension(180, 650));
+//		productPastryDetailPanel.setLayout(new GridLayout(2,1));
+//		productPastryDetailPanel.setPreferredSize(new Dimension(180, 650));
+//		
+//		coffeeSizePanel = new JPanel();
+//		coffeeTypePanel = new JPanel();
+//		coffeeExtrasPanel = new JPanel();
+//		
+//		// PANEL3
+//		
+//		toolbarParentPanel.setLayout(new BorderLayout());
+//		
+//		toolbarGroup = new JPanel();
+//		orderDisplay = new JPanel();
+//		orderDisplay.setLayout(new BorderLayout());
+//		
+//		quantitylabel = new JLabel("Quantity: ");
+//		quantity = new JTextField(5);
+//		membery = new JRadioButton("Member");
+//		membern = new JRadioButton("Not Member");
+//		membergroup = new ButtonGroup();
+//		delete = new JButton("Delete Previous");
+//		
+//		membery.setActionCommand("Member");
+//		membern.setActionCommand("Not Member");
+//		
+//		delete.addActionListener(new ButtonListener());
+//		quantity.addActionListener(new ButtonListener());
+//		membern.addActionListener(new ButtonListener());
+//		membery.addActionListener(new ButtonListener());
+//		
+//		membergroup.add(membery);
+//		membergroup.add(membern);
+//		
+//		text = new JTextArea();
+//		scroll = new JScrollPane(text);
+//		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//        text.setLineWrap(true);
+//        text.setWrapStyleWord(true);
+//        text.setEditable(false);
+//        
+//        toolbarGroup.add(quantitylabel);
+//        toolbarGroup.add(quantity);
+//        toolbarGroup.add(membery);
+//        toolbarGroup.add(membern);
+//        toolbarGroup.add(delete);
+//        orderDisplay.add(scroll, BorderLayout.CENTER);
+//        
+//        toolbarParentPanel.add(toolbarGroup, BorderLayout.SOUTH);
+//		toolbarParentPanel.add(orderDisplay, BorderLayout.CENTER);
+//		
+//		// BUTTON PANEL
+//		
+//		buttons = new JPanel();
+//		buttonEnterItem = new JButton("Enter Item");
+//		buttonTotalItem = new JButton("Total");
+//		buttonNewOrderItem = new JButton("New Order");
+//		buttons.setBackground(Color.black);
+//		
+//		buttonEnterItem.addActionListener(new ButtonListener());
+//		buttonTotalItem.addActionListener(new ButtonListener());
+//		buttonNewOrderItem.addActionListener(new ButtonListener());
+//		
+//		buttons.add(buttonEnterItem);
+//		buttons.add(buttonTotalItem);
+//		buttons.add(buttonNewOrderItem);
+//		
+//		//productCoffeeDetailPanel
+//		
+//		coffeeSizePanel.setLayout(new GridLayout(3,1));
+//		coffeeTypePanel.setLayout(new GridLayout(3,1));
+//		coffeeExtrasPanel.setLayout(new GridLayout(2,1));
+//		
+//		coffeeSizePanel.setBorder(BorderFactory.createTitledBorder("Size"));
+//		
+//		small = new JRadioButton("Small");
+//		medium = new JRadioButton("Medium");
+//		large = new JRadioButton("Large");
+//		coffeeSizeRadioGroup = new ButtonGroup();
+//		
+//		small.setActionCommand("Small");
+//		medium.setActionCommand("Medium");
+//		large.setActionCommand("Large");
+//		
+//		small.addActionListener(new ButtonListener());
+//		medium.addActionListener(new ButtonListener());
+//		large.addActionListener(new ButtonListener());
+//		
+//		coffeeSizeRadioGroup.add(small);
+//		coffeeSizeRadioGroup.add(medium);
+//		coffeeSizeRadioGroup.add(large);
+//		
+//		coffeeSizePanel.add(small);
+//		coffeeSizePanel.add(medium);
+//		coffeeSizePanel.add(large);
+//		
+//		coffeeTypePanel.setBorder(BorderFactory.createTitledBorder("Type"));
+//		
+//		regular = new JRadioButton("Regular");
+//		decafe = new JRadioButton("DeCafe");
+//		roast = new JRadioButton("French Roast");
+//		coffeeTypeRadioGroup = new ButtonGroup();
+//		
+//		regular.setActionCommand("Regular");
+//		decafe.setActionCommand("DeCafe");
+//		roast.setActionCommand("French Roast");
+//		
+//		regular.addActionListener(new ButtonListener());
+//		decafe.addActionListener(new ButtonListener());
+//		roast.addActionListener(new ButtonListener());
+//		
+//		coffeeTypeRadioGroup.add(regular);
+//		coffeeTypeRadioGroup.add(decafe);
+//		coffeeTypeRadioGroup.add(roast);
+//		
+//		coffeeTypePanel.add(regular);
+//		coffeeTypePanel.add(decafe);
+//		coffeeTypePanel.add(roast);
+//		
+//		coffeeExtrasPanel.setBorder(BorderFactory.createTitledBorder("Extras"));
+//		
+//		cream = new JCheckBox("Cream");
+//		sugar = new JCheckBox("Sugar");
+//		
+//		cream.addActionListener(new ButtonListener());
+//		sugar.addActionListener(new ButtonListener());
+//		
+//		coffeeExtrasPanel.add(cream);
+//		coffeeExtrasPanel.add(sugar);
+//		
+//		productCoffeeDetailPanel.add(coffeeSizePanel);
+//		productCoffeeDetailPanel.add(coffeeTypePanel);
+//		productCoffeeDetailPanel.add(coffeeExtrasPanel);
+//		
+//		//productBagelDetailPanel
+//		
+//		bagelTypePanel = new JPanel();
+//		bagelSpreadsPanel = new JPanel();
+//		bagelToppingsPanel = new JPanel();
+//		
+//		bagelTypePanel.setLayout(new GridLayout(5,1));
+//		bagelSpreadsPanel.setLayout(new GridLayout(5,1));
+//		bagelToppingsPanel.setLayout(new GridLayout(2,1));
+//		
+//		bagelTypePanel.setBorder(BorderFactory.createTitledBorder("Bagel"));
+//		
+//		white = new JRadioButton("White");
+//		wheat = new JRadioButton("Wheat");
+//		salt = new JRadioButton("Salt");
+//		sesame = new JRadioButton("sesame");
+//		popy = new JRadioButton("Popy");
+//		bagelTypeRadioGroup = new ButtonGroup();
+//		
+//		white.setActionCommand("White");
+//		wheat.setActionCommand("Wheat");
+//		salt.setActionCommand("Salt");
+//		sesame.setActionCommand("sesame");
+//		popy.setActionCommand("Popy");
+//		
+//		white.addActionListener(new ButtonListener());
+//		wheat.addActionListener(new ButtonListener());
+//		salt.addActionListener(new ButtonListener());
+//		sesame.addActionListener(new ButtonListener());
+//		popy.addActionListener(new ButtonListener());
+//		
+//		bagelTypeRadioGroup.add(white);
+//		bagelTypeRadioGroup.add(wheat);
+//		bagelTypeRadioGroup.add(salt);
+//		bagelTypeRadioGroup.add(sesame);
+//		bagelTypeRadioGroup.add(popy);
+//		
+//		bagelTypePanel.add(white);
+//		bagelTypePanel.add(wheat);
+//		bagelTypePanel.add(salt);
+//		bagelTypePanel.add(sesame);
+//		bagelTypePanel.add(popy);
+//		
+//		bagelSpreadsPanel.setBorder(BorderFactory.createTitledBorder("Spreads"));
+//		
+//		cc = new JRadioButton("Cream Cheese");
+//		lcc = new JRadioButton("Lowfat Cream Cheese");
+//		gc = new JRadioButton("Garlic Cream");
+//		butter = new JRadioButton("Butter");
+//		jam = new JRadioButton("Jam");
+//		bagelSpreadsRadioGroup = new ButtonGroup();
+//		
+//		cc.setActionCommand("Cream Cheese");
+//		lcc.setActionCommand("Lowfat Cream Cheese");
+//		gc.setActionCommand("Garlic Cream");
+//		butter.setActionCommand("Butter");
+//		jam.setActionCommand("Jam ");
+//		
+//		cc.addActionListener(new ButtonListener());
+//		lcc.addActionListener(new ButtonListener());
+//		gc.addActionListener(new ButtonListener());
+//		butter.addActionListener(new ButtonListener());
+//		jam.addActionListener(new ButtonListener());
+//		
+//		bagelSpreadsRadioGroup.add(cc);
+//		bagelSpreadsRadioGroup.add(lcc);
+//		bagelSpreadsRadioGroup.add(gc);
+//		bagelSpreadsRadioGroup.add(butter);
+//		bagelSpreadsRadioGroup.add(jam);
+//		
+//		bagelSpreadsPanel.add(cc);
+//		bagelSpreadsPanel.add(lcc);
+//		bagelSpreadsPanel.add(gc);
+//		bagelSpreadsPanel.add(butter);
+//		bagelSpreadsPanel.add(jam);
+//		
+//		bagelToppingsPanel.setBorder(BorderFactory.createTitledBorder("Toppings"));
+//		
+//		lox = new JCheckBox("Lox");
+//		novalox = new JCheckBox("Nova Lox");
+//		
+//		lox.addActionListener(new ButtonListener());
+//		novalox.addActionListener(new ButtonListener());
+//		
+//		bagelToppingsPanel.add(lox);
+//		bagelToppingsPanel.add(novalox);
+//		
+//		productBagelDetailPanel.add(bagelTypePanel);
+//		productBagelDetailPanel.add(bagelSpreadsPanel);
+//		productBagelDetailPanel.add(bagelToppingsPanel);
+//		
+//		//productPastryDetailPanel
+//		
+//		pastryPastriesPanel = new JPanel();
+//		
+//		pastryPastriesPanel.setLayout(new GridLayout());
+//		pastryPastriesPanel.setBorder(BorderFactory.createTitledBorder("Pastries"));
+//		
+//		list = new JList(pastrylist);
+//		
+//		list.addListSelectionListener(new ListListener());
+//		
+//		pastryPastriesPanel.add(list);
+//		productPastryDetailPanel.add(pastryPastriesPanel);
+//		
+//		parent.add(productCategoryPanel, BorderLayout.WEST);
+//		parent.add(productCoffeeDetailPanel, BorderLayout.CENTER);
+//		layout = (BorderLayout)parent.getLayout();
+//		
+//		product1.doClick();
+//		membern.doClick();
+//	}
+	
+	//after
+	private void createParentPanel() {
+	    parent = new JPanel();
+	    parent.setLayout(new BorderLayout(10, 10));
+
+	    title = new JLabel("Order Entry Screen");
+	    title.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
-//	//after
+	private void createProductCategoryPanel() {
+	 	productCategoryPanel = new JPanel();
+	    productCategoryPanel.setBorder(BorderFactory.createTitledBorder("Products"));
+	    productCategoryPanel.setLayout(new GridLayout(3, 1));
 
+	    product1 = new JRadioButton("Coffee");
+	    product2 = new JRadioButton("Bagel");
+	    product3 = new JRadioButton("Pastry");
+	    productgroup = new ButtonGroup();
+
+	    productgroup.add(product1);
+	    productgroup.add(product2);
+	    productgroup.add(product3);
+
+	    product1.addActionListener(new ButtonListener());
+	    product2.addActionListener(new ButtonListener());
+	    product3.addActionListener(new ButtonListener());
+
+	    productCategoryPanel.add(product1);
+	    productCategoryPanel.add(product2);
+	    productCategoryPanel.add(product3);
+	}
+	
+	private void createProductCoffeeDetailPanel() {
+		productCoffeeDetailPanel = new JPanel();
+		productCoffeeDetailPanel.setLayout(new GridLayout(3,1));
+		productCoffeeDetailPanel.setPreferredSize(new Dimension(180, 650));
+		coffeeSizePanel = new JPanel();
+	    coffeeTypePanel = new JPanel();
+	    coffeeExtrasPanel = new JPanel();
+
+	    coffeeSizePanel.setLayout(new GridLayout(3, 1));
+	    coffeeTypePanel.setLayout(new GridLayout(3, 1));
+	    coffeeExtrasPanel.setLayout(new GridLayout(2, 1));
+
+	    coffeeSizePanel.setBorder(BorderFactory.createTitledBorder("Size"));
+
+	    small = new JRadioButton("Small");
+	    medium = new JRadioButton("Medium");
+	    large = new JRadioButton("Large");
+	    coffeeSizeRadioGroup = new ButtonGroup();
+
+	    small.setActionCommand("Small");
+	    medium.setActionCommand("Medium");
+	    large.setActionCommand("Large");
+
+	    small.addActionListener(new ButtonListener());
+	    medium.addActionListener(new ButtonListener());
+	    large.addActionListener(new ButtonListener());
+
+	    coffeeSizeRadioGroup.add(small);
+	    coffeeSizeRadioGroup.add(medium);
+	    coffeeSizeRadioGroup.add(large);
+
+	    coffeeSizePanel.add(small);
+	    coffeeSizePanel.add(medium);
+	    coffeeSizePanel.add(large);
+
+	    coffeeTypePanel.setBorder(BorderFactory.createTitledBorder("Type"));
+
+	    regular = new JRadioButton("Regular");
+	    decafe = new JRadioButton("Decaf");
+	    roast = new JRadioButton("French Roast");
+	    coffeeTypeRadioGroup = new ButtonGroup();
+
+	    regular.setActionCommand("Regular");
+	    decafe.setActionCommand("Decaf");
+	    roast.setActionCommand("French Roast");
+
+	    regular.addActionListener(new ButtonListener());
+	    decafe.addActionListener(new ButtonListener());
+	    roast.addActionListener(new ButtonListener());
+
+	    coffeeTypeRadioGroup.add(regular);
+	    coffeeTypeRadioGroup.add(decafe);
+	    coffeeTypeRadioGroup.add(roast);
+
+	    coffeeTypePanel.add(regular);
+	    coffeeTypePanel.add(decafe);
+	    coffeeTypePanel.add(roast);
+
+	    coffeeExtrasPanel.setBorder(BorderFactory.createTitledBorder("Extras"));
+
+	    cream = new JCheckBox("Cream");
+	    sugar = new JCheckBox("Sugar");
+
+	    cream.addActionListener(new ButtonListener());
+	    sugar.addActionListener(new ButtonListener());
+
+	    coffeeExtrasPanel.add(cream);
+	    coffeeExtrasPanel.add(sugar);
+
+	    productCoffeeDetailPanel.add(coffeeSizePanel);
+	    productCoffeeDetailPanel.add(coffeeTypePanel);
+	    productCoffeeDetailPanel.add(coffeeExtrasPanel);
+	}
+	
+	
+	
+	private void createProductBagelDetailPanel() {
+		productBagelDetailPanel = new JPanel();
+		productBagelDetailPanel.setLayout(new GridLayout(3,1));
+		productBagelDetailPanel.setPreferredSize(new Dimension(180, 650));
+	 	bagelTypePanel = new JPanel();
+	    bagelSpreadsPanel = new JPanel();
+	    bagelToppingsPanel = new JPanel();
+
+	    bagelTypePanel.setLayout(new GridLayout(5, 1));
+	    bagelSpreadsPanel.setLayout(new GridLayout(5, 1));
+	    bagelToppingsPanel.setLayout(new GridLayout(2, 1));
+
+	    bagelTypePanel.setBorder(BorderFactory.createTitledBorder("Bagel"));
+
+	    white = new JRadioButton("White");
+	    wheat = new JRadioButton("Wheat");
+	    salt = new JRadioButton("Salt");
+	    sesame = new JRadioButton("Sesame");
+	    popy = new JRadioButton("Popy");
+	    bagelTypeRadioGroup = new ButtonGroup();
+
+	    white.setActionCommand("White");
+	    wheat.setActionCommand("Wheat");
+	    salt.setActionCommand("Salt");
+	    sesame.setActionCommand("Sesame");
+	    popy.setActionCommand("Popy");
+
+	    white.addActionListener(new ButtonListener());
+	    wheat.addActionListener(new ButtonListener());
+	    salt.addActionListener(new ButtonListener());
+	    sesame.addActionListener(new ButtonListener());
+	    popy.addActionListener(new ButtonListener());
+
+	    bagelTypeRadioGroup.add(white);
+	    bagelTypeRadioGroup.add(wheat);
+	    bagelTypeRadioGroup.add(salt);
+	    bagelTypeRadioGroup.add(sesame);
+	    bagelTypeRadioGroup.add(popy);
+
+	    bagelTypePanel.add(white);
+	    bagelTypePanel.add(wheat);
+	    bagelTypePanel.add(salt);
+	    bagelTypePanel.add(sesame);
+	    bagelTypePanel.add(popy);
+
+	    bagelSpreadsPanel.setBorder(BorderFactory.createTitledBorder("Spreads"));
+
+	    cc = new JRadioButton("Cream Cheese");
+	    lcc = new JRadioButton("Lowfat Cream Cheese");
+	    gc = new JRadioButton("Garlic Cream");
+	    butter = new JRadioButton("Butter");
+	    jam = new JRadioButton("Jam");
+	    bagelSpreadsRadioGroup = new ButtonGroup();
+
+	    cc.setActionCommand("Cream Cheese");
+	    lcc.setActionCommand("Lowfat Cream Cheese");
+	    gc.setActionCommand("Garlic Cream");
+	    butter.setActionCommand("Butter");
+	    jam.setActionCommand("Jam");
+
+	    cc.addActionListener(new ButtonListener());
+	    lcc.addActionListener(new ButtonListener());
+	    gc.addActionListener(new ButtonListener());
+	    butter.addActionListener(new ButtonListener());
+	    jam.addActionListener(new ButtonListener());
+
+	    bagelSpreadsRadioGroup.add(cc);
+	    bagelSpreadsRadioGroup.add(lcc);
+	    bagelSpreadsRadioGroup.add(gc);
+	    bagelSpreadsRadioGroup.add(butter);
+	    bagelSpreadsRadioGroup.add(jam);
+
+	    bagelSpreadsPanel.add(cc);
+	    bagelSpreadsPanel.add(lcc);
+	    bagelSpreadsPanel.add(gc);
+	    bagelSpreadsPanel.add(butter);
+	    bagelSpreadsPanel.add(jam);
+
+	    bagelToppingsPanel.setBorder(BorderFactory.createTitledBorder("Toppings"));
+
+	    lox = new JCheckBox("Lox");
+	    novalox = new JCheckBox("Nova Lox");
+
+	    lox.addActionListener(new ButtonListener());
+	    novalox.addActionListener(new ButtonListener());
+
+	    bagelToppingsPanel.add(lox);
+	    bagelToppingsPanel.add(novalox);
+
+	    productBagelDetailPanel.add(bagelTypePanel);
+	    productBagelDetailPanel.add(bagelSpreadsPanel);
+	    productBagelDetailPanel.add(bagelToppingsPanel);
+	}
+	
+	private void createProductPastryDetailPanel() {
+		productPastryDetailPanel = new JPanel();
+		productPastryDetailPanel.setLayout(new GridLayout(2,1));
+		productPastryDetailPanel.setPreferredSize(new Dimension(180, 650));
+	    productPastryDetailPanel = new JPanel();
+	    productPastryDetailPanel.setLayout(new GridLayout(1, 1));
+	    productPastryDetailPanel.setBorder(BorderFactory.createTitledBorder("Pastries"));
+
+	    list = new JList(pastrylist);
+	    list.addListSelectionListener(new ListListener());
+
+	    productPastryDetailPanel.add(list);
+	}
+	
+	private void createToolbarParentPanel() {
+	    toolbarParentPanel = new JPanel();
+	    toolbarParentPanel.setLayout(new BorderLayout());
+
+	    toolbarGroup = new JPanel();
+	    orderDisplay = new JPanel();
+	    orderDisplay.setLayout(new BorderLayout());
+
+	    quantitylabel = new JLabel("Quantity: ");
+	    quantity = new JTextField(5);
+	    membery = new JRadioButton("Member");
+	    membern = new JRadioButton("Not Member");
+	    membergroup = new ButtonGroup();
+	    delete = new JButton("Delete Previous");
+
+	    membery.setActionCommand("Member");
+	    membern.setActionCommand("Not Member");
+
+	    delete.addActionListener(new ButtonListener());
+	    quantity.addActionListener(new ButtonListener());
+	    membern.addActionListener(new ButtonListener());
+	    membery.addActionListener(new ButtonListener());
+
+	    membergroup.add(membery);
+	    membergroup.add(membern);
+
+	    text = new JTextArea();
+	    scroll = new JScrollPane(text);
+	    scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    text.setLineWrap(true);
+	    text.setWrapStyleWord(true);
+	    text.setEditable(false);
+
+	    toolbarGroup.add(quantitylabel);
+	    toolbarGroup.add(quantity);
+	    toolbarGroup.add(membery);
+	    toolbarGroup.add(membern);
+	    toolbarGroup.add(delete);
+	    orderDisplay.add(scroll, BorderLayout.CENTER);
+
+	    toolbarParentPanel.add(toolbarGroup, BorderLayout.SOUTH);
+	    toolbarParentPanel.add(orderDisplay, BorderLayout.CENTER);
+	}
+	private void createButtonsPanel() {
+	    buttons = new JPanel();
+	    buttons.setBackground(Color.black);
+
+	    buttonEnterItem = new JButton("Enter Item");
+	    buttonTotalItem = new JButton("Total");
+	    buttonNewOrderItem = new JButton("New Order");
+
+	    buttonEnterItem.addActionListener(new ButtonListener());
+	    buttonTotalItem.addActionListener(new ButtonListener());
+	    buttonNewOrderItem.addActionListener(new ButtonListener());
+
+	    buttons.add(buttonEnterItem);
+	    buttons.add(buttonTotalItem);
+	    buttons.add(buttonNewOrderItem);
+	}
+	private void buildPanel() {
+		createParentPanel();
+	    createProductCategoryPanel();
+	    createProductCoffeeDetailPanel();
+	    createProductBagelDetailPanel();
+	    createProductPastryDetailPanel();
+	    createToolbarParentPanel();
+	    createButtonsPanel();
+	    parent.add(productCategoryPanel, BorderLayout.WEST);
+	    parent.add(productCoffeeDetailPanel, BorderLayout.CENTER);
+	    parent.add(toolbarParentPanel, BorderLayout.EAST);
+	    parent.add(buttons, BorderLayout.SOUTH);
+	    layout = (BorderLayout) parent.getLayout();
+	    product1.doClick();
+	    membern.doClick();
+	}
 
 	
 	

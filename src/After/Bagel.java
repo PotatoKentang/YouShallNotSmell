@@ -14,11 +14,11 @@ public class Bagel extends Product
 	Bagel()
 	{
 		super();
-	    products.add("Bagel");
 	}
 
 	//after
 	public void getSelectedButton(ButtonGroup group, ButtonGroup group2) {
+		products.add("Bagel");
 	    if (group.getSelection() != null) {
 	        String product = group.getSelection().getActionCommand();
 	        products.add(product);
@@ -37,7 +37,7 @@ public class Bagel extends Product
 	    variants.put("White", 300);
 	    variants.put("Wheat", 350);
 	    variants.put("Salt", 350);
-	    variants.put("Seseme", 400);
+	    variants.put("Sesame", 400);
 	    variants.put("Popy", 350);
 	    variants.put("Lox Topping", 50);
 	    variants.put("Nova Lox Topping", 30);

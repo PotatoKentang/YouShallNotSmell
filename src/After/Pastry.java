@@ -8,13 +8,13 @@ public class Pastry extends Product
 	Pastry()
 	{
 		super();
-		products.add("Pastry");
 	}
 
 //	after belom yakin
 	public void getSelectedButton(int[] indices, String[] options) {
 	    for (int index : indices) {
 	        if (index >= 0 && index < options.length) {
+	        	products.add("Pastry");
 	        	products.add(options[index]);
 	        }
 	    }

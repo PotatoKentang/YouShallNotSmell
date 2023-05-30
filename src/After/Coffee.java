@@ -14,11 +14,11 @@ public class Coffee extends Product
 	Coffee()
 	{
 		super();
-		products.add("Coffee");
 	}
 
 	//after
 	public void getSelectedButton(ButtonGroup group, ButtonGroup group2) {
+		products.add("Coffee");
 	    StringBuilder product = new StringBuilder();
 	    
 	    if (group.getSelection() != null) {
