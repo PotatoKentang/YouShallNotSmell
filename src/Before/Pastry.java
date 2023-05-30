@@ -1,10 +1,11 @@
+package Before;
 import java.util.ArrayList;
 
 
 public class Pastry 
 {
 	private ArrayList<String> string;
-	private ArrayList<Integer> price = new ArrayList<Integer>();;
+	private ArrayList<Integer> price = new ArrayList<Integer>();
 	
 	Pastry()
 	{
