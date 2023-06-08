@@ -40,6 +40,30 @@ public class Order
 		order.clear();
 	}
 	
+	public void deletePreviousOrder() {
+		int i = this.order.size()-1;
+		int k = this.orderprice.size()-1;
+		boolean yes = false;
+		int y = i;
+		int x = k;
+		
+		while(!yes && !(i == -1 && k == -1))
+		{
+			if(this.order.get(y).equals("Coffee")||this.order.get(y).equals("Bagel")||this.order.get(y).equals("Pastry"))
+			{
+				this.order.remove(y);
+				yes = true;
+			}
+			else
+			{
+				this.order.remove(y);
+				this.orderprice.remove(x);
+				y--;
+				x--;
+			}
+		}
+	}
+	
 	public ArrayList<Integer> getOrderprice() {
 		return orderprice;
 	}
